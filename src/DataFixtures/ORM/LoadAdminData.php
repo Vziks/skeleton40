@@ -3,7 +3,6 @@
 namespace App\DataFixtures\ORM;
 
 use App\Application\Sonata\UserBundle\Entity\User;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -13,11 +12,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Class LoadAdminData.
  * Project symfony-next.
+ *
  * @author Anton Prokhorov
  */
 class LoadAdminData extends AbstractFixture implements FixtureInterface, ContainerAwareInterface
 {
-
     /**
      * @var ContainerInterface
      */
@@ -34,7 +33,7 @@ class LoadAdminData extends AbstractFixture implements FixtureInterface, Contain
     }
 
     /**
-     * Load data fixtures with the passed EntityManager
+     * Load data fixtures with the passed EntityManager.
      *
      * @param ObjectManager $manager
      */
@@ -46,17 +45,15 @@ class LoadAdminData extends AbstractFixture implements FixtureInterface, Contain
         $manager->flush();
     }
 
-    static public function getFakeAdmin()
+    public static function getFakeAdmin()
     {
         $admin = new User();
-        $admin->setEmail("admin@gmail.com");
-        $admin->setUsername("admin");
-        $admin->setPlainPassword("admin");
+        $admin->setEmail('admin@gmail.com');
+        $admin->setUsername('admin');
+        $admin->setPlainPassword('admin');
         $admin->setEnabled(true);
         $admin->setSuperAdmin(true);
 
         return $admin;
     }
-
-
 }

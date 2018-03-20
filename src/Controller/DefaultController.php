@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class DefaultController.
  * Project symfony-next.
+ *
  * @author Anton Prokhorov
  */
 class DefaultController extends Controller

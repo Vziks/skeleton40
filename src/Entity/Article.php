@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use Application\Sonata\ClassificationBundle\Entity\Tag;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,11 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
  * @author Anton Prokhorov
  *
  * @ORM\Entity()
- *
  */
 class Article
 {
-
     /**
      * @var int
      *
@@ -33,7 +29,6 @@ class Article
      */
     protected $title;
 
-
     /**
      * @var string
      *
@@ -41,14 +36,12 @@ class Article
      */
     protected $preview;
 
-
     /**
      * @var string
      *
      * @ORM\Column(type="text")
      */
     protected $content;
-
 
     /**
      * @return int
@@ -68,6 +61,7 @@ class Article
 
     /**
      * @param string $content
+     *
      * @return self
      */
     public function setContent($content)
@@ -87,11 +81,13 @@ class Article
 
     /**
      * @param string $title
+     *
      * @return Article
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -105,11 +101,13 @@ class Article
 
     /**
      * @param string $preview
+     *
      * @return Article
      */
     public function setPreview($preview)
     {
         $this->preview = $preview;
+
         return $this;
     }
 }

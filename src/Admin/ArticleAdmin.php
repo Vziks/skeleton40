@@ -2,9 +2,7 @@
 
 namespace App\Admin;
 
-use Doctrine\DBAL\Types\StringType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -15,11 +13,11 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 /**
  * Class ArticleAdmin.
  * Project symfony-next.
+ *
  * @author Anton Prokhorov
  */
 class ArticleAdmin extends AbstractAdmin
 {
-
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -30,7 +28,6 @@ class ArticleAdmin extends AbstractAdmin
             ->add('title')
         ;
     }
-
 
     /**
      * @param ListMapper $listMapper
