@@ -4,8 +4,44 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "02a849a65111879194ca8fab3d023472",
+    "content-hash": "28ad0baa215d11866b78a484158fc965",
     "packages": [
+        {
+            "name": "adw/config-bundle",
+            "version": "1.4.3",
+            "source": {
+                "type": "git",
+                "url": "https://bitbucket.org/prodhub/config-bundle.git",
+                "reference": "8c942d74b6922cb459ba4a1829ea970cd9640059"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://bitbucket.org/prodhub/config-bundle/get/8c942d74b6922cb459ba4a1829ea970cd9640059.zip",
+                "reference": "8c942d74b6922cb459ba4a1829ea970cd9640059",
+                "shasum": ""
+            },
+            "require": {
+                "sonata-project/admin-bundle": "^3.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ADW\\ConfigBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anton Prokhorov",
+                    "email": "vziks@live.ru"
+                }
+            ],
+            "homepage": "https://bitbucket.org/prodhub/config-bundle",
+            "time": "2018-03-20T15:00:32+00:00"
+        },
         {
             "name": "cocur/slugify",
             "version": "v3.1",

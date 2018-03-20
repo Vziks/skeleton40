@@ -1,4 +1,7 @@
 {
+    "adw/config-bundle": {
+        "version": "1.4.2"
+    },
     "cocur/slugify": {
         "version": "v3.1"
     },

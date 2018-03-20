@@ -107,6 +107,7 @@ class AdminFunctionalTest extends WebTestCase
             ['/admin/sonata/user/group/create'],
             ['/admin/sonata/media/media/create?context=default&category=1&hide_context=0'],
             ['/admin/sonata/media/gallery/create?context=default'],
+            ['/admin/adw/config/configsite/create'],
         ];
     }
 
@@ -120,7 +121,8 @@ class AdminFunctionalTest extends WebTestCase
             ['/admin/sonata/user/user/list'],
             ['/admin/sonata/user/group/list'],
             ['/admin/sonata/media/media/list'],
-            ['/admin/sonata/media/gallery/list']
+            ['/admin/sonata/media/gallery/list'],
+            ['/admin/adw/config/configsite/list']
         ];
     }
 }
