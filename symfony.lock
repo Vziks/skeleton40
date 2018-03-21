@@ -1,6 +1,27 @@
 {
+    "adw/common-bundle": {
+        "version": "1.0.5"
+    },
     "adw/config-bundle": {
         "version": "1.4.2"
+    },
+    "adw/geoip-bundle": {
+        "version": "dev-master"
+    },
+    "adw/guzzle-bundle": {
+        "version": "v1.0.0"
+    },
+    "adw/js-context-bundle": {
+        "version": "dev-master"
+    },
+    "adw/rest-client-bundle": {
+        "version": "v1.0.0"
+    },
+    "adw/seo-bundle": {
+        "version": "1.0.5"
+    },
+    "adw/sonata-media-extra-bundle": {
+        "version": "1.0.16"
     },
     "cocur/slugify": {
         "version": "v3.1"
@@ -119,8 +140,23 @@
             "ref": "370bcf99b04c0dfd0b545745aad622d757af5e1b"
         }
     },
+    "friendsofsymfony/rest-bundle": {
+        "version": "2.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.2",
+            "ref": "258300d52be6ad59b32a888d5ddafbf9638540ff"
+        }
+    },
     "friendsofsymfony/user-bundle": {
         "version": "v2.1.2"
+    },
+    "guzzlehttp/guzzle": {
+        "version": "6.3.0"
+    },
+    "guzzlehttp/promises": {
+        "version": "v1.3.1"
     },
     "guzzlehttp/psr7": {
         "version": "1.4.2"
@@ -164,8 +200,14 @@
     "liip/functional-test-bundle": {
         "version": "1.9.3"
     },
+    "michelf/php-markdown": {
+        "version": "1.8.0"
+    },
     "monolog/monolog": {
         "version": "1.23.0"
+    },
+    "myclabs/deep-copy": {
+        "version": "1.7.0"
     },
     "nelmio/api-doc-bundle": {
         "version": "3.0",
@@ -205,6 +247,9 @@
     },
     "phpoption/phpoption": {
         "version": "1.5.0"
+    },
+    "phpseclib/phpseclib": {
+        "version": "2.0.4"
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -544,6 +589,9 @@
     },
     "willdurand/jsonp-callback-validator": {
         "version": "v1.1.0"
+    },
+    "willdurand/negotiation": {
+        "version": "v2.3.1"
     },
     "zendframework/zend-code": {
         "version": "3.3.0"

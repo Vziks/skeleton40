@@ -4,7 +4,14 @@
     "require": {
         "php": "^7.1.3",
         "ext-iconv": "*",
+        "adw/common-bundle": "^1.0",
         "adw/config-bundle": "^1.4",
+        "adw/geoip-bundle": "dev-master",
+        "adw/guzzle-bundle": "^1.0",
+        "adw/js-context-bundle": "^0.4.4",
+        "adw/rest-client-bundle": "^1.0",
+        "adw/seo-bundle": "^1.0",
+        "adw/sonata-media-extra-bundle": "^1.0",
         "doctrine/annotations": "^1.6",
         "doctrine/common": "^2.8",
         "doctrine/dbal": "^2.6",
@@ -13,8 +20,9 @@
         "doctrine/orm": "^2.6",
         "friendsofphp/php-cs-fixer": "^2.10",
         "friendsofsymfony/jsrouting-bundle": "^2.2",
+        "friendsofsymfony/rest-bundle": "^2.3",
         "friendsofsymfony/user-bundle": "^2.1",
-        "nelmio/api-doc-bundle": "^3.1",
+        "nelmio/api-doc-bundle": "^2.1",
         "sensio/framework-extra-bundle": "^5.1",
         "sonata-project/admin-bundle": "^3.33",
         "sonata-project/block-bundle": "^3.12",
@@ -82,11 +90,21 @@
         "symfony/symfony": "*"
     },
     "extra": {
+        "public-dir": "web",
         "symfony-tests-dir": "tests",
         "symfony-bin-dir": "bin",
         "symfony": {
             "id": "01C918A7SYKJHGP40KCR0021AW",
             "allow-contrib": false
         }
-    }
+    },
+    "repositories": [
+        { "type": "vcs", "url": "https://bitbucket.org/prodhub/common-bundle.git" },
+        { "type": "vcs", "url": "https://bitbucket.org/prodhub/js-context-bundle.git" },
+        { "type": "vcs", "url": "https://bitbucket.org/prodhub/adw-geoip-bundle.git" },
+        { "type": "vcs", "url": "https://bitbucket.org/prodhub/seo-bundle.git"},
+        { "type": "vcs", "url": "https://bitbucket.org/prodhub/adw-sonata-media-extra-bundle.git"},
+        { "type": "vcs", "url": "https://bitbucket.org/prodhub/rest-client-bundle.git"},
+        { "type": "vcs", "url": "https://bitbucket.org/prodhub/guzzle-bundle.git" }
+    ]
 }

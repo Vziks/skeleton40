@@ -1,3 +1,12 @@
+adw_common_api:
+    resource: "@ADWCommonBundle/API/Controller/"
+    type:     annotation
+    prefix:   /api/adw/common
+
+adw_seo:
+    resource: "@ADWSEOBundle/Admin/Controller/"
+    type:     annotation
+
 gallery:
     resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'
     prefix: /media/gallery

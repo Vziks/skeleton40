@@ -25,7 +25,7 @@ sonata_media:
 
     filesystem:
         local:
-            directory:  "%kernel.root_dir%/../public/uploads/media" #flex
+            directory:  "%kernel.root_dir%/../web/uploads/media" #flex
             #directory:  "%kernel.root_dir%/../web/uploads/media" #non-flex
             create:     false
     class:
