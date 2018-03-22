@@ -6,7 +6,7 @@
         "ext-iconv": "*",
         "adw/common-bundle": "^1.0",
         "adw/config-bundle": "^1.4",
-        "adw/geoip-bundle": "dev-master",
+        "adw/geoip-bundle": "^1.0",
         "adw/guzzle-bundle": "^1.0",
         "adw/js-context-bundle": "^0.4.4",
         "adw/rest-client-bundle": "^1.0",
@@ -105,6 +105,7 @@
         { "type": "vcs", "url": "https://bitbucket.org/prodhub/seo-bundle.git"},
         { "type": "vcs", "url": "https://bitbucket.org/prodhub/adw-sonata-media-extra-bundle.git"},
         { "type": "vcs", "url": "https://bitbucket.org/prodhub/rest-client-bundle.git"},
-        { "type": "vcs", "url": "https://bitbucket.org/prodhub/guzzle-bundle.git" }
+        { "type": "vcs", "url": "https://bitbucket.org/prodhub/guzzle-bundle.git" },
+        { "type": "vcs", "url": "https://bitbucket.org/prodhub/slider-bundle.git"}
     ]
 }

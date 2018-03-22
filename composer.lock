@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "04e0ed84538996a52c0f5f1bde6719fd",
+    "content-hash": "a77a65a35a4602880004bb3c7eba0765",
     "packages": [
         {
             "name": "adw/common-bundle",
@@ -79,7 +79,7 @@
         },
         {
             "name": "adw/geoip-bundle",
-            "version": "dev-master",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://bitbucket.org/prodhub/adw-geoip-bundle.git",
@@ -9219,7 +9219,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "adw/geoip-bundle": 20,
         "symfony/lts": 20
     },
     "prefer-stable": false,
