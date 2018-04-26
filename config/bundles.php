@@ -32,7 +32,6 @@ return [
     Liip\FunctionalTestBundle\LiipFunctionalTestBundle::class => ['dev' => true, 'test' => true],
     Nelmio\ApiDocBundle\NelmioApiDocBundle::class => ['all' => true],
     FOS\RestBundle\FOSRestBundle::class => ['all' => true],
-    //ADW bundles
     ADW\ConfigBundle\ADWConfigBundle::class => ['all' => true],
     ADW\CommonBundle\ADWCommonBundle::class => ['all' => true],
     ADW\SEOBundle\ADWSEOBundle::class => ['all' => true],
@@ -41,4 +40,5 @@ return [
     ADW\JsContextBundle\ADWJsContextBundle::class => ['all' => true],
     ADW\GeoIpBundle\ADWGeoIpBundle::class => ['all' => true],
     ADW\SonataMediaExtraBundle\ADWSonataMediaExtraBundle::class => ['all' => true],
+    Symfony\Bundle\WebServerBundle\WebServerBundle::class => ['dev' => true],
 ];

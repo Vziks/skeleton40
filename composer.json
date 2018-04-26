@@ -33,11 +33,13 @@
         "symfony/console": "^4.0",
         "symfony/css-selector": "^4.0",
         "symfony/debug-pack": "^1.0",
+        "symfony/dotenv": "^4.0",
         "symfony/flex": "^1.0",
         "symfony/framework-bundle": "^4.0",
         "symfony/lts": "^4@dev",
         "symfony/monolog-bundle": "^3.2",
         "symfony/swiftmailer-bundle": "^3.2",
+        "symfony/translation": "^4.0",
         "symfony/twig-bundle": "^4.0",
         "symfony/var-dumper": "^4.0",
         "symfony/yaml": "^4.0"
@@ -46,9 +48,9 @@
         "doctrine/doctrine-fixtures-bundle": "^3.0",
         "liip/functional-test-bundle": "^1.9",
         "sensiolabs/security-checker": "^4.1",
-        "symfony/dotenv": "^4.0",
         "symfony/phpunit-bridge": "^4.0",
-        "symfony/profiler-pack": "^1.0"
+        "symfony/profiler-pack": "^1.0",
+        "symfony/web-server-bundle": "^4.0"
     },
     "config": {
         "sort-packages": true,

@@ -1,6 +1,5 @@
 .env
 /public/bundles/
-/var/
 /vendor/
 
 /.php_cs
@@ -22,9 +21,9 @@
 !var/sessions/.gitkeep
 /var/sessions/*
 !var/SymfonyRequirements.php
-/vendor/
+
 /web/bundles/
-/.idea/
+
 /.bundle/
 /app/bootstrap.php.cache
 /app/cache/*
@@ -49,3 +48,7 @@
 /web/robots.txt
 
 /log/
+
+###> symfony/web-server-bundle ###
+/.web-server-pid
+###< symfony/web-server-bundle ###
