@@ -27,7 +27,10 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    App\DataFixtures\ORM\LoadAdminData:
+    App\DataFixtures\ORM\LoadAdminDataFixture:
+        tags: [doctrine.fixture.orm]
+
+    App\DataFixtures\ORM\LoadArticleDataFixture:
         tags: [doctrine.fixture.orm]
 
     app.admin.article_admin:

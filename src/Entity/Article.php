@@ -43,6 +43,16 @@ class Article
      */
     protected $content;
 
+    public function __toString()
+    {
+        $toString = '';
+        if ($this->getId()) {
+            $toString = $this->getTitle();
+        }
+
+        return $toString;
+    }
+
     /**
      * @return int
      */

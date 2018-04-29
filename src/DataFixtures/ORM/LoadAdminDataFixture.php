@@ -5,6 +5,7 @@ namespace App\DataFixtures\ORM;
 use App\Application\Sonata\UserBundle\Entity\User;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -15,7 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *
  * @author Anton Prokhorov
  */
-class LoadAdminData extends AbstractFixture implements FixtureInterface, ContainerAwareInterface
+class LoadAdminDataFixture extends AbstractFixture implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
     /**
      * @var ContainerInterface
@@ -55,5 +56,15 @@ class LoadAdminData extends AbstractFixture implements FixtureInterface, Contain
         $admin->setSuperAdmin(true);
 
         return $admin;
+    }
+
+    /**
+     * Get the order of this fixture.
+     *
+     * @return int
+     */
+    public function getOrder()
+    {
+        return 0;
     }
 }

@@ -40,7 +40,7 @@ class ArticleAdmin extends AbstractAdmin
             ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
-                    'history' => ['template' => 'AppBundle::Admin/list__action_history.html.twig'],
+                    'history' => ['template' => 'admin/list__action_history.html.twig'],
                     'edit' => [],
                     'delete' => [],
                 ],
