@@ -2,10 +2,9 @@
 
 namespace App\Tests\Admin;
 
-use App\DataFixtures\ORM\LoadAdminData;
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Client;
-use App\DataFixtures\ORM\LoadAdminData as FixtureAdmin;
+use App\DataFixtures\ORM\LoadAdminDataFixture as FixtureAdmin;
 
 /**
  * Class AdminFunctionalTest.
@@ -17,7 +16,7 @@ class AdminFunctionalTest extends WebTestCase
     protected function setUp()
     {
         $this->loadFixtures([
-            LoadAdminData::class
+            FixtureAdmin::class
         ]);
     }
 
