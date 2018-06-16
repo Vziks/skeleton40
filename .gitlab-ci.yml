@@ -1,0 +1,60 @@
+stages:
+  - build
+  - test
+
+variables:
+  MYSQL_DATABASE: "database"
+  MYSQL_ROOT_PASSWORD: "database_password"
+  SYMFONY__DATABASE__HOST: "mysql"
+  SYMFONY__DATABASE__NAME: "database"
+  SYMFONY__DATABASE__PASSWORD: "database_password"
+  SYMFONY__DATABASE__PORT: "null"
+  SYMFONY__DATABASE__USER: "root"
+  COMPOSER_CACHE_DIR: "/cache/php-composer"
+  NPM_CONFIG_CACHE: "/cache/node-npm"
+  BUNDLE_PATH: "/cache/ruby-gems"
+
+before_script:
+  - rm -f /usr/local/etc/php/conf.d/xdebug.ini
+  - echo 'date.timezone=Europe/Moscow' >> /usr/local/etc/php/conf.d/extra.ini
+  - echo 'memory_limit = 2G' >> /usr/local/etc/php/conf.d/extra.ini
+
+backend_build:
+  stage: build
+  image: kolyadin/php:71
+  script:
+    - composer install --profile --prefer-dist -n
+  cache:
+    key: $CI_PROJECT_PATH_SLUG
+    policy: push
+    paths:
+      - vendor/
+
+security_check:
+  stage: test
+  image: kolyadin/php:71
+  allow_failure: false
+  script:
+    - composer install --profile --prefer-dist -n
+    - ./vendor/bin/security-checker security:check
+  cache:
+    key: $CI_PROJECT_PATH_SLUG
+    policy: pull
+    paths:
+      - vendor/
+
+phpunit:
+  stage: test
+  image: kolyadin/php:71
+  allow_failure: false
+  services:
+    - mysql:5.5
+  script:
+    - composer install --profile --prefer-dist -n
+    - bin/setup-test.sh
+    - ./vendor/bin/simple-phpunit
+  cache:
+    key: $CI_PROJECT_PATH_SLUG
+    policy: pull
+    paths:
+      - vendor/
