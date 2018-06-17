@@ -51,7 +51,6 @@ phpunit:
     - mysql:5.5
   script:
     - composer install --profile --prefer-dist -n
-    - chmod +x ./bin/setup-test.sh
     - bin/setup-test.sh
     - ./vendor/bin/simple-phpunit
   cache:
