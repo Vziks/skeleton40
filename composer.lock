@@ -188,7 +188,7 @@
             ],
             "homepage": "https://bitbucket.org/prodhub/js-context-bundle",
             "support": {
-                "source": "https://bitbucket.org/prodhub/js-context-bundle/src/e2240cccf24a5f29bc3780b39f85b0f8a69c32e0/?at=master"
+                "source": "https://bitbucket.org/prodhub/js-context-bundle/src/e2240cccf24a5f29bc3780b39f85b0f8a69c32e0/?at=v0.4.4"
             },
             "time": "2018-03-21T15:44:33+00:00"
         },
@@ -5826,16 +5826,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.0.75",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "3da0134564f59ffbd060db8f3406e9f3e78df64e"
+                "reference": "9fb60f232af0764d58002e7872acb43a74506d25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/3da0134564f59ffbd060db8f3406e9f3e78df64e",
-                "reference": "3da0134564f59ffbd060db8f3406e9f3e78df64e",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/9fb60f232af0764d58002e7872acb43a74506d25",
+                "reference": "9fb60f232af0764d58002e7872acb43a74506d25",
                 "shasum": ""
             },
             "require": {
@@ -5849,7 +5849,7 @@
             "type": "composer-plugin",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.1-dev"
                 },
                 "class": "Symfony\\Flex\\Flex"
             },
@@ -5868,7 +5868,8 @@
                     "email": "fabien.potencier@gmail.com"
                 }
             ],
-            "time": "2018-03-20T07:32:02+00:00"
+            "description": "Composer plugin for Symfony",
+            "time": "2018-09-03T08:17:12+00:00"
         },
         {
             "name": "symfony/form",
@@ -5952,16 +5953,16 @@
         },
         {
             "name": "symfony/framework-bundle",
-            "version": "v4.0.8",
+            "version": "v4.0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/framework-bundle.git",
-                "reference": "3571d235434b566aea39d8f8bfe38860344fd9a3"
+                "reference": "6d2edab310f0010fe0797b7aa9be2b64cc135990"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/framework-bundle/zipball/3571d235434b566aea39d8f8bfe38860344fd9a3",
-                "reference": "3571d235434b566aea39d8f8bfe38860344fd9a3",
+                "url": "https://api.github.com/repos/symfony/framework-bundle/zipball/6d2edab310f0010fe0797b7aa9be2b64cc135990",
+                "reference": "6d2edab310f0010fe0797b7aa9be2b64cc135990",
                 "shasum": ""
             },
             "require": {
@@ -6062,20 +6063,20 @@
             ],
             "description": "Symfony FrameworkBundle",
             "homepage": "https://symfony.com",
-            "time": "2018-04-04T18:24:59+00:00"
+            "time": "2018-08-01T08:23:45+00:00"
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v4.0.11",
+            "version": "v4.0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "277b757a2d3960170d99d372e171a8a18916467a"
+                "reference": "7dc9f886f01ab825fd23176799ab9459e104a125"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/277b757a2d3960170d99d372e171a8a18916467a",
-                "reference": "277b757a2d3960170d99d372e171a8a18916467a",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/7dc9f886f01ab825fd23176799ab9459e104a125",
+                "reference": "7dc9f886f01ab825fd23176799ab9459e104a125",
                 "shasum": ""
             },
             "require": {
@@ -6115,7 +6116,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2018-05-25T11:08:56+00:00"
+            "time": "2018-08-01T14:06:38+00:00"
         },
         {
             "name": "symfony/http-kernel",
@@ -6338,17 +6339,6 @@
         {
             "name": "symfony/lts",
             "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/lts.git",
-                "reference": "396c5fca8d73d01186df37d7031321a3c0c2bf92"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/lts/zipball/396c5fca8d73d01186df37d7031321a3c0c2bf92",
-                "reference": "396c5fca8d73d01186df37d7031321a3c0c2bf92",
-                "shasum": ""
-            },
             "conflict": {
                 "symfony/asset": ">=5",
                 "symfony/browser-kit": ">=5",
@@ -6375,6 +6365,7 @@
                 "symfony/intl": ">=5",
                 "symfony/ldap": ">=5",
                 "symfony/lock": ">=5",
+                "symfony/messenger": ">=5",
                 "symfony/monolog-bridge": ">=5",
                 "symfony/options-resolver": ">=5",
                 "symfony/process": ">=5",
@@ -6425,7 +6416,7 @@
             ],
             "description": "Enforces Long Term Supported versions of Symfony components",
             "homepage": "https://symfony.com",
-            "time": "2017-10-19T02:16:32+00:00"
+            "time": "2018-04-03T05:04:16+00:00"
         },
         {
             "name": "symfony/monolog-bridge",
