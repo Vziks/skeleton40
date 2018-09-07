@@ -41,9 +41,9 @@ class LoadArticleDataFixture extends AbstractFixture implements ContainerAwareIn
             $article = new Article();
 
             $article
-                ->setTitle('Title'.$i)
-                ->setContent('Content '.$i.' '.uniqid('Content_'))
-                ->setPreview('Preview '.$i.' '.uniqid('Preview_'));
+                ->setTitle('Title' . $i)
+                ->setContent('Content ' . $i . ' ' . uniqid('Content_'))
+                ->setPreview('Preview ' . $i . ' ' . uniqid('Preview_'));
 
             $manager->persist($article);
         }

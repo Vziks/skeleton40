@@ -335,9 +335,6 @@
     "sonata-project/media-bundle": {
         "version": "3.11.0"
     },
-    "sonata-project/notification-bundle": {
-        "version": "3.4.0"
-    },
     "sonata-project/user-bundle": {
         "version": "4.1.1"
     },
@@ -470,6 +467,9 @@
             "ref": "179470cb6492db92dffee208cfdb436f175c93b4"
         }
     },
+    "symfony/polyfill-ctype": {
+        "version": "v1.9.0"
+    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.7.0"
     },
@@ -486,9 +486,6 @@
         "version": "v1.0.3"
     },
     "symfony/property-access": {
-        "version": "v4.0.6"
-    },
-    "symfony/property-info": {
         "version": "v4.0.6"
     },
     "symfony/routing": {
