@@ -13,18 +13,19 @@ use App\DataFixtures\ORM\LoadAdminDataFixture as FixtureAdmin;
  */
 class AdminFunctionalTest extends WebTestCase
 {
+    protected static $wasSetup = false;
+
     protected function setUp()
     {
-        $this->loadFixtures([
-            FixtureAdmin::class
-        ]);
-    }
+        parent::setUp();
 
-    protected function tearDown()
-    {
-        $this->loadFixtures([]);
+        if (false === static::$wasSetup) {
+            $this->loadFixtures([
+                FixtureAdmin::class
+            ]);
 
-        parent::tearDown();
+            static::$wasSetup = true;
+        }
     }
 
     /**
@@ -106,7 +107,9 @@ class AdminFunctionalTest extends WebTestCase
             ['/admin/sonata/user/group/create'],
             ['/admin/sonata/media/media/create?context=default&category=1&hide_context=0'],
             ['/admin/sonata/media/gallery/create?context=default'],
-            ['/admin/adw/config/configsite/create'],
+            ['/admin/adw/seo/redirectrule/create'],
+            ['/admin/adw/seo/rule/create'],
+            ['/robots/edit']
         ];
     }
 
@@ -121,7 +124,8 @@ class AdminFunctionalTest extends WebTestCase
             ['/admin/sonata/user/group/list'],
             ['/admin/sonata/media/media/list'],
             ['/admin/sonata/media/gallery/list'],
-            ['/admin/adw/config/configsite/list']
+            ['/admin/adw/seo/redirectrule/list'],
+            ['/admin/adw/seo/rule/list'],
         ];
     }
 }

@@ -1,15 +1,12 @@
 stages:
-  - build
-  - test
+  - security
+  - test_php71
+  - test_php72
 
 variables:
   MYSQL_DATABASE: "database"
-  MYSQL_ROOT_PASSWORD: "database_password"
-  SYMFONY__DATABASE__HOST: "mysql"
-  SYMFONY__DATABASE__NAME: "database"
-  SYMFONY__DATABASE__PASSWORD: "database_password"
-  SYMFONY__DATABASE__PORT: "null"
-  SYMFONY__DATABASE__USER: "root"
+  MYSQL_ROOT_PASSWORD: "supersecret"
+  DATABASE_URL: "mysql://root:supersecret@mysql:3306/database"
   COMPOSER_CACHE_DIR: "/cache/php-composer"
   NPM_CONFIG_CACHE: "/cache/node-npm"
   BUNDLE_PATH: "/cache/ruby-gems"
@@ -18,43 +15,90 @@ before_script:
   - rm -f /usr/local/etc/php/conf.d/xdebug.ini
   - echo 'date.timezone=Europe/Moscow' >> /usr/local/etc/php/conf.d/extra.ini
   - echo 'memory_limit = 2G' >> /usr/local/etc/php/conf.d/extra.ini
-
-backend_build:
-  stage: build
-  image: kolyadin/php:71
-  script:
-    - composer install --profile --prefer-dist -n
-  cache:
-    key: $CI_PROJECT_PATH_SLUG
-    policy: push
-    paths:
-      - vendor/
+  - sudo chown -R www-data:www-data ./
 
 security_check:
-  stage: test
+  stage: security
   image: kolyadin/php:71
   allow_failure: false
+  dependencies: []
   script:
     - composer install --profile --prefer-dist -n
     - ./vendor/bin/security-checker security:check
-  cache:
-    key: $CI_PROJECT_PATH_SLUG
-    policy: pull
-    paths:
-      - vendor/
+  cache: {}
 
-phpunit:
-  stage: test
+# -- PHP 7.1
+
+phpunit_71_55:
+  stage: test_php71
   image: kolyadin/php:71
   allow_failure: false
   services:
     - mysql:5.5
   script:
     - composer install --profile --prefer-dist -n
-    - bin/setup-test.sh
+    - ./bin/setup-test.sh
     - ./vendor/bin/simple-phpunit
-  cache:
-    key: $CI_PROJECT_PATH_SLUG
-    policy: pull
-    paths:
-      - vendor/
+  cache: {}
+
+phpunit_71_56:
+  stage: test_php71
+  image: kolyadin/php:71
+  allow_failure: false
+  services:
+  - mysql:5.6
+  script:
+  - composer install --profile --prefer-dist -n
+  - ./bin/setup-test.sh
+  - ./vendor/bin/simple-phpunit
+  cache: {}
+
+phpunit_71_57:
+  stage: test_php71
+  image: kolyadin/php:71
+  allow_failure: false
+  services:
+  - mysql:5.7
+  script:
+  - composer install --profile --prefer-dist -n
+  - ./bin/setup-test.sh
+  - ./vendor/bin/simple-phpunit
+  cache: {}
+
+# -- PHP 7.2
+
+phpunit_72_55:
+  stage: test_php72
+  image: kolyadin/php:72
+  allow_failure: false
+  services:
+  - mysql:5.5
+  script:
+  - composer install --profile --prefer-dist -n
+  - ./bin/setup-test.sh
+  - ./vendor/bin/simple-phpunit
+  cache: {}
+
+phpunit_72_56:
+  stage: test_php72
+  image: kolyadin/php:72
+  allow_failure: false
+  services:
+  - mysql:5.6
+  script:
+  - composer install --profile --prefer-dist -n
+  - ./bin/setup-test.sh
+  - ./vendor/bin/simple-phpunit
+  cache: {}
+
+phpunit_72_57:
+  stage: test_php72
+  image: kolyadin/php:72
+  allow_failure: false
+  services:
+  - mysql:5.7
+  script:
+  - composer install --profile --prefer-dist -n
+  - ./bin/setup-test.sh
+  - ./vendor/bin/simple-phpunit
+  cache: {}
