@@ -1,6 +1,6 @@
 stages:
   - build
-  - test
+  - test_php71
 
 variables:
   MYSQL_DATABASE: "database"
@@ -19,17 +19,6 @@ before_script:
   - echo 'date.timezone=Europe/Moscow' >> /usr/local/etc/php/conf.d/extra.ini
   - echo 'memory_limit = 2G' >> /usr/local/etc/php/conf.d/extra.ini
 
-backend_build:
-  stage: build
-  image: kolyadin/php:71
-  script:
-    - composer install --profile --prefer-dist -n
-  cache:
-    key: $CI_PROJECT_PATH_SLUG
-    policy: push
-    paths:
-      - vendor/
-
 security_check:
   stage: test
   image: kolyadin/php:71
@@ -37,24 +26,40 @@ security_check:
   script:
     - composer install --profile --prefer-dist -n
     - ./vendor/bin/security-checker security:check
-  cache:
-    key: $CI_PROJECT_PATH_SLUG
-    policy: pull
-    paths:
-      - vendor/
+  cache: {}
 
-phpunit:
-  stage: test
+phpunit_71_55:
+  stage: test_php71
   image: kolyadin/php:71
   allow_failure: false
   services:
     - mysql:5.5
   script:
     - composer install --profile --prefer-dist -n
-    - bin/setup-test.sh
+    - ./bin/setup-test.sh
     - ./vendor/bin/simple-phpunit
-  cache:
-    key: $CI_PROJECT_PATH_SLUG
-    policy: pull
-    paths:
-      - vendor/
+  cache: {}
+
+phpunit_71_56:
+  stage: test_php71
+  image: kolyadin/php:71
+  allow_failure: false
+  services:
+  - mysql:5.6
+  script:
+  - composer install --profile --prefer-dist -n
+  - ./bin/setup-test.sh
+  - ./vendor/bin/simple-phpunit
+  cache: {}
+
+phpunit_71_57:
+  stage: test_php71
+  image: kolyadin/php:71
+  allow_failure: false
+  services:
+  - mysql:5.7
+  script:
+  - composer install --profile --prefer-dist -n
+  - ./bin/setup-test.sh
+  - ./vendor/bin/simple-phpunit
+  cache: {}

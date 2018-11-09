@@ -1,6 +1,0 @@
-adw_config:
-    rules:
-        - {rule: '+', firewalls: ['main']}
-        # "+" на какие firewall распростронять в виде массива
-        - {rule: '-', firewalls: ['admin', 'dev']}
-        # "-" на какие не распространять

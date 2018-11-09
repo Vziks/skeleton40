@@ -41,21 +41,38 @@ class LoadAdminDataFixture extends AbstractFixture implements FixtureInterface, 
     public function load(ObjectManager $manager)
     {
         $admin = static::getFakeAdmin();
-
         $manager->persist($admin);
+
+        $moderator = static::getFakeModerator();
+        $manager->persist($moderator);
+
         $manager->flush();
     }
 
     public static function getFakeAdmin()
     {
         $admin = new User();
-        $admin->setEmail('admin@gmail.com');
+        $admin->setEmail('admin@symfony.com');
         $admin->setUsername('admin');
         $admin->setPlainPassword('admin');
         $admin->setEnabled(true);
         $admin->setSuperAdmin(true);
 
         return $admin;
+    }
+
+    public static function getFakeModerator()
+    {
+        $moderator = (new User())
+            ->setEmail('moderator@symfony.com')
+            ->setUsername('moderator')
+            ->setPlainPassword('moderator')
+            ->setEnabled(true)
+            ->setRoles([
+                'ROLE_ADMIN',
+            ]);
+
+        return $moderator;
     }
 
     /**
