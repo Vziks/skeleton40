@@ -1,15 +1,11 @@
 stages:
-  - test
+  - security
   - test_php71
 
 variables:
   MYSQL_DATABASE: "database"
-  MYSQL_ROOT_PASSWORD: "database_password"
-  SYMFONY__DATABASE__HOST: "mysql"
-  SYMFONY__DATABASE__NAME: "database"
-  SYMFONY__DATABASE__PASSWORD: "database_password"
-  SYMFONY__DATABASE__PORT: "null"
-  SYMFONY__DATABASE__USER: "root"
+  MYSQL_ROOT_PASSWORD: "supersecret"
+  DATABASE_URL: "mysql://root:supersecret@mysql:3306/database"
   COMPOSER_CACHE_DIR: "/cache/php-composer"
   NPM_CONFIG_CACHE: "/cache/node-npm"
   BUNDLE_PATH: "/cache/ruby-gems"
@@ -18,11 +14,13 @@ before_script:
   - rm -f /usr/local/etc/php/conf.d/xdebug.ini
   - echo 'date.timezone=Europe/Moscow' >> /usr/local/etc/php/conf.d/extra.ini
   - echo 'memory_limit = 2G' >> /usr/local/etc/php/conf.d/extra.ini
+  - sudo chown -R www-data:www-data ./
 
 security_check:
-  stage: test
+  stage: security
   image: kolyadin/php:71
   allow_failure: false
+  dependencies: []
   script:
     - composer install --profile --prefer-dist -n
     - ./vendor/bin/security-checker security:check
