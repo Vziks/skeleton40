@@ -13,7 +13,7 @@ sudo yum install -y php71w-bcmath
 
 cd your-project/
 composer install
-bin/console server:start
+bin/console server:start --docroot=web
 ```
 
 ### [Sonata](https://sonata-project.org/)
