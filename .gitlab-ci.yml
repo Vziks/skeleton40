@@ -1,12 +1,15 @@
 stages:
+# - build
   - security
   - test_php71
   - test_php72
+#  - deploy
+#  - performance
 
 variables:
-  MYSQL_DATABASE: "database"
+  MYSQL_DATABASE: "skeleton4"
   MYSQL_ROOT_PASSWORD: "supersecret"
-  DATABASE_URL: "mysql://root:supersecret@mysql:3306/database"
+  DATABASE_URL: "mysql://root:supersecret@mysql:3306/skeleton4"
   COMPOSER_CACHE_DIR: "/cache/php-composer"
   NPM_CONFIG_CACHE: "/cache/node-npm"
   BUNDLE_PATH: "/cache/ruby-gems"
@@ -16,6 +19,28 @@ before_script:
   - echo 'date.timezone=Europe/Moscow' >> /usr/local/etc/php/conf.d/extra.ini
   - echo 'memory_limit = 2G' >> /usr/local/etc/php/conf.d/extra.ini
   - sudo chown -R www-data:www-data ./
+
+#frontend_build:
+#  stage: build
+#  image: node:8.11
+#  before_script:
+#    - rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Moscow /etc/localtime
+#  script:
+#    - npm install
+#    - npm install gulp
+#    - npm run dist
+#    - chown -R www-data:www-data node_modules/
+#    - chown -R www-data:www-data web/bundles/frontend/
+#  artifacts:
+#    name: "$CI_PIPELINE_ID"
+#    when: on_success
+#    expire_in: 1 week
+#    paths:
+#      - web/bundles/frontend/
+#  cache:
+#    key: ${CI_PROJECT_PATH_SLUG}
+#    paths:
+#      - node_modules/
 
 security_check:
   stage: security
@@ -102,3 +127,76 @@ phpunit_72_57:
   - ./bin/setup-test.sh
   - ./vendor/bin/simple-phpunit
   cache: {}
+
+##
+# Deploy
+##
+.deploy: &deploy
+  stage: deploy
+  image: kolyadin/ruby-rsync
+  cache: {}
+  before_script:
+    - rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Moscow /etc/localtime
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$DEPLOY_SERVER_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+# dependencies:
+#   - frontend_build
+  script:
+    - bundle install
+  tags:
+    - deploy
+
+
+#deploy_dev:
+#  <<: *deploy
+#  script:
+#    - bundle exec cap dev deploy
+#  only:
+#    - dev
+#
+#deploy_stag:
+#  <<: *deploy
+#  script:
+#    - bundle exec cap stag deploy
+#  only:
+#    - stag
+#
+#deploy_prod:
+#  <<: *deploy
+#  script:
+#    - bundle exec cap prod deploy
+#  only:
+#    - master
+#
+###
+## Performance
+###
+#.pagespeed: &pagespeed
+#  stage: performance
+#  image: kolyadin/google-pagespeed
+#  before_script: []
+#  variables:
+#    GIT_STRATEGY: none
+#  cache: {}
+#  allow_failure: true
+#  tags:
+#    - performance
+#
+#pagespeed_stag:
+#  <<: *pagespeed
+#  script:
+#    - psi --strategy desktop $STAG_ABSOLUTE_URL
+#    - psi --strategy mobile $STAG_ABSOLUTE_URL
+#  only:
+#    - stag
+#
+#pagespeed_prod:
+#  <<: *pagespeed
+#  script:
+#    - psi --strategy desktop $PROD_ABSOLUTE_URL
+#    - psi --strategy mobile $PROD_ABSOLUTE_URL
+#  only:
+#    - master
