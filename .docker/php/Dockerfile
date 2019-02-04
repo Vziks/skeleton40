@@ -1,6 +1,7 @@
 FROM php:7.2-fpm-alpine
 
-LABEL maintainer="denibasov@yandex.ru"
+LABEL maintainer="denis.basov@isobar.ru"
+LABEL maintainer="aleksey.kolyadin@isobar.ru"
 
 RUN apk update                          && \
     apk upgrade                         && \
@@ -14,11 +15,13 @@ RUN apk update                          && \
         g++                                \
         libtool                            \
         make                               \
-        bash                               \
         pcre-dev                        && \
     apk add --no-cache                     \
+        supervisor                         \
         tini                               \
         git                                \
+        bash                               \
+        procps                             \
         curl                               \
         libintl                            \
         icu                                \
@@ -40,6 +43,7 @@ RUN apk update                          && \
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ &&  \
     docker-php-ext-install -j"$(getconf _NPROCESSORS_ONLN)" \
         intl                                                \
+        opcache                                             \
         bcmath                                              \
         xsl                                                 \
         zip                                                 \
@@ -54,12 +58,12 @@ RUN apk update                          && \
         gmp                                                 \
         iconv                                               \
         gd                                               && \
-    pecl install apcu imagick ssh2-1.1.2                        && \
-    docker-php-ext-enable apcu imagick ssh2                     && \
+    pecl install imagick ssh2-1.1.2                      && \
+    docker-php-ext-enable imagick ssh2                   && \
     echo "expose_php=0" > /usr/local/etc/php/php.ini            && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && \
     apk del .build-dependencies                                 && \
     docker-php-source delete                                    && \
     rm -rf /tmp/* /var/cache/apk/*
 
-CMD ["php-fpm"]
+CMD ["supervisord", "-c", "/etc/supervisord.conf", "-n", "-j", "/supervisord.pid"]
