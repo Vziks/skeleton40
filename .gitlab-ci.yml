@@ -91,6 +91,19 @@ phpunit_71_57:
   - ./vendor/bin/simple-phpunit
   cache: {}
 
+phpunit_71_80:
+  stage: test_php71
+  image: kolyadin/php:71
+  allow_failure: false
+  services:
+    - name: mysql:8.0
+      command: ["--default-authentication-plugin=mysql_native_password"]
+  script:
+    - composer install --profile --prefer-dist -n
+    - ./bin/setup-test.sh
+    - ./vendor/bin/simple-phpunit
+  cache: {}
+
 # -- PHP 7.2
 
 phpunit_72_55:
@@ -129,6 +142,19 @@ phpunit_72_57:
   - ./vendor/bin/simple-phpunit
   cache: {}
 
+phpunit_72_80:
+  stage: test_php72
+  image: kolyadin/php:72
+  allow_failure: false
+  services:
+    - name: mysql:8.0
+      command: ["--default-authentication-plugin=mysql_native_password"]
+  script:
+    - composer install --profile --prefer-dist -n
+    - ./bin/setup-test.sh
+    - ./vendor/bin/simple-phpunit
+  cache: {}
+
 
 # -- PHP 7.3
 
@@ -162,6 +188,19 @@ phpunit_73_57:
   allow_failure: false
   services:
     - mysql:5.7
+  script:
+    - composer install --profile --prefer-dist -n
+    - ./bin/setup-test.sh
+    - ./vendor/bin/simple-phpunit
+  cache: {}
+
+phpunit_73_80:
+  stage: test_php73
+  image: kolyadin/php:73
+  allow_failure: false
+  services:
+    - name: mysql:8.0
+      command: ["--default-authentication-plugin=mysql_native_password"]
   script:
     - composer install --profile --prefer-dist -n
     - ./bin/setup-test.sh
