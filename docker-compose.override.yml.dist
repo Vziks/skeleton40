@@ -12,7 +12,7 @@ services:
       - ./var/data/rabbitmq:/var/lib/rabbitmq:rw,delegated
 
   app_cli:
-    command: "/bin/bash -c 'bin/setup-dev.sh && while true; do sleep 30; done;'"
+    command: "/bin/bash -c 'bin/setup-init.sh && while true; do sleep 30; done;'"
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:4.8

@@ -18,6 +18,7 @@ RUN apk update                          && \
         pcre-dev                        && \
     apk add --no-cache                     \
         supervisor                         \
+        sudo                               \
         tini                               \
         git                                \
         bash                               \
@@ -61,6 +62,7 @@ RUN apk update                          && \
     pecl install imagick ssh2-1.1.2                      && \
     docker-php-ext-enable imagick ssh2                   && \
     echo "expose_php=0" > /usr/local/etc/php/php.ini            && \
+    echo 'www-data  ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/www-data && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && \
     apk del .build-dependencies                                 && \
     docker-php-source delete                                    && \

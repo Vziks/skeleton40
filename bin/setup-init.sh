@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+sudo chown -R www-data:www-data ./
+
 if [[ ! -f phpunit.xml ]]; then
     cp phpunit.xml.dist phpunit.xml
 fi
