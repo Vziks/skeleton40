@@ -18,6 +18,8 @@ services:
       context: .docker/php/
     user: www-data
     working_dir: /var/www/
+    depends_on:
+      - database
     command: "/bin/bash -c 'while true; do sleep 30; done;'"
     volumes:
       - ./:/var/www/:rw,cached
