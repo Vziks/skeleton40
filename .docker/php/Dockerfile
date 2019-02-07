@@ -19,6 +19,7 @@ RUN apk update                          && \
     apk add --no-cache                     \
         supervisor                         \
         sudo                               \
+        shadow                             \
         tini                               \
         git                                \
         bash                               \
@@ -67,5 +68,7 @@ RUN apk update                          && \
     apk del .build-dependencies                                 && \
     docker-php-source delete                                    && \
     rm -rf /tmp/* /var/cache/apk/*
+
+RUN usermod -u 1000 www-data
 
 CMD ["supervisord", "-c", "/etc/supervisord.conf", "-n", "-j", "/supervisord.pid"]
