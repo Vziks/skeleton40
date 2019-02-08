@@ -9,6 +9,8 @@
 
 .idea/
 
+docker-compose.override.yml
+
 /app/config/parameters.yml
 /build/
 /phpunit.xml
@@ -17,11 +19,17 @@
 /var/cache/*
 !var/cache/.gitkeep
 
+!/var/log
+/var/log/*
+!var/log/.gitkeep
+
+!/var/logs
 /var/logs/*
 !var/logs/.gitkeep
+
 !/var/sessions
-!var/sessions/.gitkeep
 /var/sessions/*
+!var/sessions/.gitkeep
 !var/SymfonyRequirements.php
 
 /web/bundles/
