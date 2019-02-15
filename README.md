@@ -1,118 +1,128 @@
-# Приступая к работе
+# Название проекта
 
-## Схема ветвления git
+Skeleton4 - специальный собранный набор компонентов symfony4 для создания современных веб-приложений
 
-**Минимальная:**
+## Приступая к работе
 
-1. master -> task_1234567_extra_alias
-2. master <- pr <- task_1234567_extra_alias
+Данное приложение адаптировано к работе через Docker.
+**Если вы хотите запускать приложение, используя Docker**, убедитесь в том, что у вас установлено:
 
-**Задача из task tracker + демонстрация на тестовом**
+1. docker >= 18.06.0
+2. docker-compose >= 1.23.2
 
-1. master -> task_1234567_extra_alias _(начало работы над задачей)_
-2. dev <- pr <- task_1234567_extra_alias _(демонстрация функционала на тестовом хосте)_
-3. master <- pr <- task_1234567_extra_alias _(деплой на боевой)_
+Для нативного запуска приложения вам потребуется:
 
-**Задача из task tracker + демонстрация на тестовом + демонстрация на staging**
+1. php      >= 7.1.3 (+iconv +imagick +bcmath +json)
+2. composer >= 1.6.3
+3. mysql    >= 5.7
 
-1. master -> task_1234567_extra_alias _(начало работы над задачей)_
-2. dev <- pr <- task_1234567_extra_alias _(демонстрация функционала на тестовом хосте)_
-3. stag <- pr <- task_1234567_extra_alias _(предрелизный показ)_
-4. master <- pr <- stag _(деплой на боевой)_
+### Подготовка к установке и запуску приложения
 
-На проекте используется Continuous Integration и Continuous Deployment
+Скопируйте файл docker-compose.override.yml.dist в docker-compose.override.yml
+Этот файл позволяет вам переопредлять стандартные настройки с учетом специфики вашей хост-системы
 
-## Деплой (Deployment)
+**Если вы работаете на Linux**:
 
-Deployment выполняется используя [Capistrano](http://capistranorb.com/)
+Узнайте ваш user id:
 
-Изучите настройки Capistrano:
-
-app/config/deploy.rb
-
-app/config/deploy/prod.rb
-
-```
-bundle install
-bundle exec cap prod deploy
+```bash
+$ id -u $(whoami) // Узнайте ваш user id
+$ 1001 // Допустим ваш user id 1001
 ```
 
-####Проект GitLab:
+Откройте файл docker-compose.override.yml и присвойте аргументу HOST_USER_ID значение вашего user id:
 
-https://gitlab.cloud.isobar.ru/skeleton/skeleton4
-
-## Известные хосты, ветки окружения, CI+CD
-
-| Окружение | Git branch  | Автодеплой | Хост       |
-|-----------|------------ |------------|------------|
-| prod      | master      | да/нет     | 
-| stag      | stag        | да/нет     | 
-| demo1     | dev         | да/нет     | 
-
-
-
-## Требования к запуску
-
-**Mac OS / Windows / \*nix:**
-
-* php >=7.1
-* mysql >=5.5
-
-
-## Как запускать тесты
-
-```
-./bin/phpunit -c app/ src/
-```
-Для работы тестов, если используется реальная База Данных, необходимо определить следующие переменные окружения:
-SYMFONY__DB_TEST_USER, SYMFONY__DB_TEST_NAME, SYMFONY__DB_TEST_PASSWORD, SYMFONY__DB_TEST_PORT, SYMFONY__DB_TEST_HOST
-
-Пример:
-
-```
-export SYMFONY__DATABASE__HOST='127.0.0.1'
-export SYMFONY__DATABASE__NAME='skeleton'
-export SYMFONY__DATABASE__PASSWORD='null'
-export SYMFONY__DATABASE__PORT='null'
-export SYMFONY__DATABASE__USER='root'
+```bash
+$ sed -i 's/HOST_USER_ID\: .*/HOST_USER_ID\: 1001/g' docker-compose.override.yml
 ```
 
-#Sonata 
+### Установка и запуск приложения
 
-## Media Bundle request
-```
-sudo yum install -y php71w-bcmath
-```
+#### Docker-way
 
-### [How to Use PHP's built-in Web Server](https://symfony.com/doc/current/setup/built_in_web_server.html)
-Для запуска проекта:
-
-```
-#!bash
-
-cd your-project/
-composer install
-bin/console server:start --docroot=web
+```bash
+docker-compose up -d
 ```
 
-### [Sonata](https://sonata-project.org/)
-Почти вся семейка сонаты.
+В итоге, запущенное приложение будет доступно по адресу:
 
-### [Nelmio Api Doc Bundle](https://github.com/nelmio/NelmioApiDocBundle)
-Генерация документации к методам на основе аннотаций.
+http://127.0.0.1:8080/
 
-### [FOS JS Routing Bundle](https://github.com/FriendsOfSymfony/FOSJsRoutingBundle)
-Позволяет использовать роутинг в JS. Нельзя хардкодить пути к методам в js.
+Вы можете изменить порт по-умолчанию, переопределив его в файле docker-compose.override.yml
 
-# Админка #
-Админка доступна по адресу /admin
+#### Native
 
-# [PHP Coding Standards Fixer](https://cs.sensiolabs.org/)
-Для приведения кода в нормальный вид выполнить:
-
-```
-#!bash
-
-./vendor/bin/php-cs-fixer fix src --rules=@Symfony
+```bash
+chmod +x ./bin/setup-init.sh
+./bin/setup.init.sh
 ```
 
+A step by step series of examples that tell you how to get a development env running
+
+Say what the step will be
+
+```
+Give the example
+```
+
+And repeat
+
+```
+until finished
+```
+
+End with an example of getting some data out of the system or using it for a little demo
+
+## Running the tests
+
+Explain how to run the automated tests for this system
+
+### Break down into end to end tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+### And coding style tests
+
+Explain what these tests test and why
+
+```
+Give an example
+```
+
+## Deployment
+
+Add additional notes about how to deploy this on a live system
+
+## Built With
+
+* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
+* [Maven](https://maven.apache.org/) - Dependency Management
+* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+
+## Contributing
+
+Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+
+## Authors
+
+* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* Hat tip to anyone whose code was used
+* Inspiration
+* etc
