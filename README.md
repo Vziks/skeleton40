@@ -50,6 +50,8 @@ http://127.0.0.1:8080/
 
 Вы можете изменить порт по-умолчанию, переопределив его в файле docker-compose.override.yml
 
+Читайте подробнее про [docker-compose.override.yml](https://docs.docker.com/compose/extends/)
+
 #### Native
 
 ```bash
@@ -57,22 +59,6 @@ chmod +x ./bin/setup-init.sh
 ./bin/setup-init.sh
 php bin/console server:run
 ```
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Running the tests
 
@@ -91,54 +77,67 @@ docker-compose exec app_cli /var/www/bin/setup-test.sh
 docker-compose exec app_cli /var/www/vendor/bin/simple-phpunit -c /var/www/phpunit.xml
 ```
 
+Вы можете интегрировать запуск тестов в PhpStorm IDE, [смотрите здесь](https://www.youtube.com/watch?v=P5ivCbdMpwc)
 
-### Break down into end to end tests
+## Развертывание (Deployment)
 
-Explain what these tests test and why
+Для удаленного развертывания используется [Capistrano](https://capistranorb.com/)
 
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
+В приложении интегрированы рецепты для развертывания на удаленные серверы, смотрите файлы:
 
 ```
-Give an example
+./config/deploy.rb
+./config/deploy/dev.rb
+./config/deploy/stag.rb
+./config/deploy/prod.rb
+./Capfile
+./Gemfile
+./Gemfile.lock
 ```
 
-## Deployment
+Deployment осуществляется на уровне протокола SSH.
 
-В приложении интегрированы рецепты для развертывания на удаленные серверы.
+Если вы хотите деплоить непосредственно с локальной машины (**не рекомендуется**) вам потребуется прописать свой публичный ключ SSH на каждый из удаленных серверов, описанных в файлах:
 
-Используется [Capistrano](http://capistranorb.com/)
+```
+./config/deploy/dev.rb
+./config/deploy/stag.rb
+./config/deploy/prod.rb
+```
 
-### Gitlab-way
+Также необходимо убедиться, что публичный ключ пользователя, на каждом из удаленных серверов, добавлен в настройки репозитория.
+
+В большинстве случаев нет никакой необходимости выполнять деплой прямо с локальной машины, так как процесс деплоя выполняется на сервере Continuous Deployment. 
+
+#### Gitlab-way
 
 Для автоматического запуска процесса развертки, как правило, достаточно просто запушить изменения в соответствующую git ветку.
 
-Для подробностей смотрите файл: .gitlab-ci.yml, секцию "Deploy"
+Для подробностей смотрите файл [.gitlab-ci.yml](./.gitlab-ci.yml), секцию "Deploy"
 
-
-### Docker-way
+#### Docker-way
 
 ```bash
 docker run -it --rm \
- -v $(pwd):/var/www \
+ -v $(pwd):/var/www:cached \
  -v ~/.ssh:/root/.ssh \
  kolyadin/ruby-rsync:alpine \
  sh -c 'cd /var/www && bundle install && bundle exec cap dev deploy'
 ```
 
-### Native
+#### Native
 
 Для нативного выполнения удаленного развертывания вам потребуется:
 
 1. ruby >= 2.4
 2. bundler >= 1.16.1
 
+Выполните команды:
 
+```bash
+bundle install
+bundle exec cap dev deploy
+```
 
 ## Разработано с помощью
 
@@ -146,27 +145,32 @@ docker run -it --rm \
 * [Sonata Admin](https://sonata-project.org/bundles/admin/3-x/doc/index.html) - Admin generator
 * [Sonata Media](https://sonata-project.org/bundles/media/3-x/doc/index.html) - Media manager
 
-## Как работать с приложеним
+## Как вносить изменения в приложение
 
+#### Схема ветвления git
 
+**Минимальная:**
 
+1. master -> task_1234567_extra_alias
+2. master <- pr <- task_1234567_extra_alias
 
-## Versioning
+**Задача из task tracker + демонстрация на тестовом**
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+1. master -> task_1234567_extra_alias _(начало работы над задачей)_
+2. dev <- pr <- task_1234567_extra_alias _(демонстрация функционала на тестовом хосте)_
+3. master <- pr <- task_1234567_extra_alias _(деплой на боевой)_
 
-## Authors
+**Задача из task tracker + демонстрация на тестовом + демонстрация на staging**
 
+1. master -> task_1234567_extra_alias _(начало работы над задачей)_
+2. dev <- pr <- task_1234567_extra_alias _(демонстрация функционала на тестовом хосте)_
+3. stag <- pr <- task_1234567_extra_alias _(предрелизный показ)_
+4. master <- pr <- stag _(деплой на боевой)_
 
+#### Известные хосты, ветки окружения, CI+CD
 
-
-
-## License
-
-
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+| Окружение | Git branch  | Автодеплой | Хост |
+|-----------|------------ |------------|------------|
+| prod      | master      | да|нет     | 
+| stag      | stag        | да|нет     | 
+| demo1     | dev         | да|нет     |
