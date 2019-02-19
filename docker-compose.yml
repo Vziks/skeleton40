@@ -46,7 +46,7 @@ services:
       - ./var/data/database:/var/lib/mysql:rw,delegated
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: database
+      MYSQL_DATABASE: skeleton4
 
 networks:
   default:
