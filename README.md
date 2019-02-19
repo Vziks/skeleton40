@@ -19,7 +19,7 @@ Skeleton4 - специальный собранный набор компоне�
 ### Подготовка к установке и запуску приложения
 
 Скопируйте файл docker-compose.override.yml.dist в docker-compose.override.yml
-Этот файл позволяет вам переопредлять стандартные настройки с учетом специфики вашей хост-системы
+Этот файл позволяет вам переопредлять стандартные настройки с учетом специфики вашей хост-системы.
 
 **Если вы работаете на Linux**:
 
@@ -33,7 +33,7 @@ $ 1001 // Допустим ваш user id 1001
 Откройте файл docker-compose.override.yml и присвойте аргументу HOST_USER_ID значение вашего user id:
 
 ```bash
-$ sed -i 's/HOST_USER_ID\: .*/HOST_USER_ID\: 1001/g' docker-compose.override.yml
+$ sed -i 's/HOST_USER_ID: .*/HOST_USER_ID: 1001/g' docker-compose.override.yml
 ```
 
 ### Установка и запуск приложения
@@ -54,7 +54,8 @@ http://127.0.0.1:8080/
 
 ```bash
 chmod +x ./bin/setup-init.sh
-./bin/setup.init.sh
+./bin/setup-init.sh
+php bin/console server:run
 ```
 
 A step by step series of examples that tell you how to get a development env running
@@ -75,7 +76,21 @@ End with an example of getting some data out of the system or using it for a lit
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+В этом приложении применяется функциональное тестирование на основе phpunit.
+
+Для подготовки приложения к тестированию выполните:
+
+```bash
+docker-compose up -d app_cli
+docker-compose exec app_cli /var/www/bin/setup-test.sh
+```
+
+Теперь можно запустить тесты:
+
+```bash
+docker-compose exec app_cli /var/www/vendor/bin/simple-phpunit -c /var/www/phpunit.xml
+```
+
 
 ### Break down into end to end tests
 
@@ -95,17 +110,46 @@ Give an example
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+В приложении интегрированы рецепты для развертывания на удаленные серверы.
 
-## Built With
+Используется [Capistrano](http://capistranorb.com/)
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+### Gitlab-way
 
-## Contributing
+Для автоматического запуска процесса развертки, как правило, достаточно просто запушить изменения в соответствующую git ветку.
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Для подробностей смотрите файл: .gitlab-ci.yml, секцию "Deploy"
+
+
+### Docker-way
+
+```bash
+docker run -it --rm \
+ -v $(pwd):/var/www \
+ -v ~/.ssh:/root/.ssh \
+ kolyadin/ruby-rsync:alpine \
+ sh -c 'cd /var/www && bundle install && bundle exec cap dev deploy'
+```
+
+### Native
+
+Для нативного выполнения удаленного развертывания вам потребуется:
+
+1. ruby >= 2.4
+2. bundler >= 1.16.1
+
+
+
+## Разработано с помощью
+
+* [Symfony 4.2](https://symfony.com/doc/current/index.html) - PHP Web Framework
+* [Sonata Admin](https://sonata-project.org/bundles/admin/3-x/doc/index.html) - Admin generator
+* [Sonata Media](https://sonata-project.org/bundles/media/3-x/doc/index.html) - Media manager
+
+## Как работать с приложеним
+
+
+
 
 ## Versioning
 
@@ -113,13 +157,13 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
+
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
 
 ## Acknowledgments
 
