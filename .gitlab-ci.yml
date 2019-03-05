@@ -56,72 +56,51 @@ security_check:
     paths:
       - vendor/
 
+#
+
+.phpunit: &phpunit
+  allow_failure: false
+  script:
+    - composer install --profile --prefer-dist -n
+    - ./bin/setup-test.sh
+    - ./vendor/bin/simple-phpunit
+  cache:
+    key: ${CI_PROJECT_PATH_SLUG}
+    policy: pull
+    paths:
+      - vendor/
+
 # -- PHP 7.1
 
 phpunit_71_55:
   stage: test_php71
   image: kolyadin/php:71
-  allow_failure: false
   services:
     - mysql:5.5
-  script:
-    - composer install --profile --prefer-dist -n
-    - ./bin/setup-test.sh
-    - ./vendor/bin/simple-phpunit
-  cache:
-    key: ${CI_PROJECT_PATH_SLUG}
-    policy: pull
-    paths:
-      - vendor/
+  <<: *phpunit
+
 
 phpunit_71_56:
   stage: test_php71
   image: kolyadin/php:71
-  allow_failure: false
   services:
-  - mysql:5.6
-  script:
-  - composer install --profile --prefer-dist -n
-  - ./bin/setup-test.sh
-  - ./vendor/bin/simple-phpunit
-  cache:
-    key: ${CI_PROJECT_PATH_SLUG}
-    policy: pull
-    paths:
-      - vendor/
+    - mysql:5.6
+  <<: *phpunit
 
 phpunit_71_57:
   stage: test_php71
   image: kolyadin/php:71
-  allow_failure: false
   services:
-  - mysql:5.7
-  script:
-  - composer install --profile --prefer-dist -n
-  - ./bin/setup-test.sh
-  - ./vendor/bin/simple-phpunit
-  cache:
-    key: ${CI_PROJECT_PATH_SLUG}
-    policy: pull
-    paths:
-      - vendor/
+    - mysql:5.7
+  <<: *phpunit
 
 phpunit_71_80:
   stage: test_php71
   image: kolyadin/php:71
-  allow_failure: false
   services:
     - name: mysql:8.0
       command: ["--default-authentication-plugin=mysql_native_password"]
-  script:
-    - composer install --profile --prefer-dist -n
-    - ./bin/setup-test.sh
-    - ./vendor/bin/simple-phpunit
-  cache:
-    key: ${CI_PROJECT_PATH_SLUG}
-    policy: pull
-    paths:
-      - vendor/
+  <<: *phpunit
 
 # -- PHP 7.2
 
@@ -130,65 +109,30 @@ phpunit_72_55:
   image: kolyadin/php:72
   allow_failure: false
   services:
-  - mysql:5.5
-  script:
-  - composer install --profile --prefer-dist -n
-  - ./bin/setup-test.sh
-  - ./vendor/bin/simple-phpunit
-  cache:
-    key: ${CI_PROJECT_PATH_SLUG}
-    policy: pull
-    paths:
-      - vendor/
+    - mysql:5.5
+  <<: *phpunit
 
 phpunit_72_56:
   stage: test_php72
   image: kolyadin/php:72
-  allow_failure: false
   services:
-  - mysql:5.6
-  script:
-  - composer install --profile --prefer-dist -n
-  - ./bin/setup-test.sh
-  - ./vendor/bin/simple-phpunit
-  cache:
-    key: ${CI_PROJECT_PATH_SLUG}
-    policy: pull
-    paths:
-      - vendor/
+    - mysql:5.6
+  <<: *phpunit
 
 phpunit_72_57:
   stage: test_php72
   image: kolyadin/php:72
-  allow_failure: false
   services:
-  - mysql:5.7
-  script:
-  - composer install --profile --prefer-dist -n
-  - ./bin/setup-test.sh
-  - ./vendor/bin/simple-phpunit
-  cache:
-    key: ${CI_PROJECT_PATH_SLUG}
-    policy: pull
-    paths:
-      - vendor/
+    - mysql:5.7
+  <<: *phpunit
 
 phpunit_72_80:
   stage: test_php72
   image: kolyadin/php:72
-  allow_failure: false
   services:
     - name: mysql:8.0
       command: ["--default-authentication-plugin=mysql_native_password"]
-  script:
-    - composer install --profile --prefer-dist -n
-    - ./bin/setup-test.sh
-    - ./vendor/bin/simple-phpunit
-  cache:
-    key: ${CI_PROJECT_PATH_SLUG}
-    policy: pull
-    paths:
-      - vendor/
+  <<: *phpunit
 
 
 # -- PHP 7.3
@@ -196,67 +140,31 @@ phpunit_72_80:
 phpunit_73_55:
   stage: test_php73
   image: kolyadin/php:73
-  allow_failure: false
   services:
     - mysql:5.5
-  script:
-    - composer install --profile --prefer-dist -n
-    - ./bin/setup-test.sh
-    - ./vendor/bin/simple-phpunit
-  cache:
-    key: ${CI_PROJECT_PATH_SLUG}
-    policy: pull
-    paths:
-      - vendor/
+  <<: *phpunit
 
 phpunit_73_56:
   stage: test_php73
   image: kolyadin/php:73
-  allow_failure: false
   services:
     - mysql:5.6
-  script:
-    - composer install --profile --prefer-dist -n
-    - ./bin/setup-test.sh
-    - ./vendor/bin/simple-phpunit
-  cache:
-    key: ${CI_PROJECT_PATH_SLUG}
-    policy: pull
-    paths:
-      - vendor/
+  <<: *phpunit
 
 phpunit_73_57:
   stage: test_php73
   image: kolyadin/php:73
-  allow_failure: false
   services:
     - mysql:5.7
-  script:
-    - composer install --profile --prefer-dist -n
-    - ./bin/setup-test.sh
-    - ./vendor/bin/simple-phpunit
-  cache:
-    key: ${CI_PROJECT_PATH_SLUG}
-    policy: pull
-    paths:
-      - vendor/
+  <<: *phpunit
 
 phpunit_73_80:
   stage: test_php73
   image: kolyadin/php:73
-  allow_failure: false
   services:
     - name: mysql:8.0
       command: ["--default-authentication-plugin=mysql_native_password"]
-  script:
-    - composer install --profile --prefer-dist -n
-    - ./bin/setup-test.sh
-    - ./vendor/bin/simple-phpunit
-  cache:
-    key: ${CI_PROJECT_PATH_SLUG}
-    policy: pull
-    paths:
-      - vendor/
+  <<: *phpunit
 
 ##
 # Deploy
