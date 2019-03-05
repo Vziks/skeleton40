@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f375d9c09985a38c19df4360afbcef1f",
+    "content-hash": "bf23be3002dd7bfaea6bfa868c7af666",
     "packages": [
         {
             "name": "adw/js-context-bundle",
@@ -8949,7 +8949,8 @@
         "ext-iconv": "*",
         "ext-imagick": "*",
         "ext-bcmath": "*",
-        "ext-json": "*"
+        "ext-json": "*",
+        "ext-filter": "*"
     },
     "platform-dev": []
 }
