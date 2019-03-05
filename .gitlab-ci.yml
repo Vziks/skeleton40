@@ -63,6 +63,7 @@ security_check:
   script:
     - composer install --profile --prefer-dist -n
     - ./bin/setup-test.sh
+    - ./bin/console doctrine:schema:validate
     - ./vendor/bin/simple-phpunit
   cache:
     key: ${CI_PROJECT_PATH_SLUG}
