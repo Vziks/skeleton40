@@ -46,16 +46,11 @@ before_script:
 validation_check:
   stage: validation
   image: kolyadin/php:72
-  services:
-    - mysql:5.7
   allow_failure: false
   dependencies: []
   script:
     - composer install --profile --prefer-dist -n
     - composer validate
-    - bin/console doctrine:database:create -e test --if-not-exists
-    - bin/console doctrine:migrations:migrate -e test --no-interaction
-    - bin/console doctrine:schema:validate -e test
     - ./vendor/bin/security-checker security:check
   cache:
     key: ${CI_PROJECT_PATH_SLUG}
@@ -178,7 +173,7 @@ phpunit_73_80:
 ##
 .deploy: &deploy
   stage: deploy
-  image: kolyadin/ruby-rsync
+  image: kolyadin/ruby-rsync:alpine
   cache: {}
   before_script:
     - rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Moscow /etc/localtime
