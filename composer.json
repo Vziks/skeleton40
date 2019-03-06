@@ -1,4 +1,6 @@
 {
+    "name": "prodhub/skeleton4",
+    "description": "symfony web-framework skeleton",
     "type": "project",
     "license": "proprietary",
     "require": {
