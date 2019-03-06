@@ -45,7 +45,9 @@ before_script:
 
 validation_check:
   stage: validation
-  image: kolyadin/php:71
+  image: kolyadin/php:72
+  services:
+    - mysql:5.7
   allow_failure: false
   dependencies: []
   script:
