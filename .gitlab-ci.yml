@@ -53,7 +53,9 @@ validation_check:
   script:
     - composer install --profile --prefer-dist -n
     - composer validate
-    - bin/console doctrine:schema:validate
+    - bin/console doctrine:database:create -e test --if-not-exists
+    - bin/console doctrine:migrations:migrate -e test --no-interaction
+    - bin/console doctrine:schema:validate -e test
     - ./vendor/bin/security-checker security:check
   cache:
     key: ${CI_PROJECT_PATH_SLUG}
