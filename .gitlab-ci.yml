@@ -1,6 +1,5 @@
 stages:
 # - build
-  - linters
   - security
   - test_php71
   - test_php72
@@ -43,18 +42,6 @@ before_script:
 #    key: ${CI_PROJECT_PATH_SLUG}
 #    paths:
 #      - node_modules/
-
-lint_check:
-  stage: linters
-  image: kolyadin/php:71
-  allow_failure: false
-  dependencies: []
-  script:
-  - composer install --profile --prefer-dist -n
-  - ./bin/console lint:yaml config
-  - ./bin/console lint:twig templates
-  - ./bin/console lint:xliff translations
-  cache: {}
 
 security_check:
   stage: security
