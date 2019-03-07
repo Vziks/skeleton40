@@ -49,15 +49,22 @@ validation_check:
   allow_failure: false
   dependencies: []
   script:
-    - composer install --profile --prefer-dist -n
+    - composer install --profile --prefer-dist --no-interaction --no-scripts
     - composer validate
-    - ./vendor/bin/security-checker security:check
   cache:
     key: ${CI_PROJECT_PATH_SLUG}
     paths:
       - vendor/
 
-#
+security_check:
+  stage: validation
+  image: kolyadin/php:72
+  allow_failure: false
+  dependencies: []
+  script:
+    - composer install --profile --prefer-dist --no-interaction --no-scripts
+    - ./vendor/bin/security-checker security:check
+  cache: {}
 
 .phpunit: &phpunit
   allow_failure: false
