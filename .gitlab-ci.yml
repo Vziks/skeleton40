@@ -65,7 +65,7 @@ validation_check:
     - composer install --profile --prefer-dist -n
     - ./bin/setup-test.sh
     - ./bin/console doctrine:schema:validate
-    - ./vendor/bin/simple-phpunit
+    - ./vendor/bin/simple-phpunit -c phpunit.xml
   cache:
     key: ${CI_PROJECT_PATH_SLUG}
     policy: pull
