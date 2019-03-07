@@ -32,9 +32,11 @@ app-stop:
 	docker-compose down -v
 
 app-validate:
-	docker-compose exec -T app_cli sh -c "composer validate"
-	docker-compose exec -T app_cli sh -c "bin/console doctrine:schema:validate --skip-sync"
-	docker-compose exec -T app_cli sh -c "curl -H \"Accept: text/plain\" https://security.symfony.com/check_lock -F lock=@/var/www/composer.lock"
+	docker-compose up -d app_cli
+	docker-compose exec -T app_cli sh -c "composer install --prefer-dist --no-scripts --optimize-autoloader && \
+		composer validate && \
+		bin/console doctrine:schema:validate --skip-sync && \
+		curl -H \"Accept: text/plain\" https://security.symfony.com/check_lock -F lock=@/var/www/composer.lock"
 
 phpunit-run:
 	docker-compose up -d app_cli
