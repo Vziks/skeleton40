@@ -51,6 +51,7 @@ validation_check:
   script:
     - composer install --profile --prefer-dist --no-interaction --no-scripts
     - composer validate
+    - bin/console doctrine:schema:validate --skip-sync
   cache:
     key: ${CI_PROJECT_PATH_SLUG}
     paths:
