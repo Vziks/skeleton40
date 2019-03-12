@@ -1,4 +1,6 @@
 {
+    "name": "prodhub/skeleton4",
+    "description": "symfony web-framework skeleton",
     "type": "project",
     "license": "proprietary",
     "require": {
@@ -7,6 +9,7 @@
         "ext-imagick": "*",
         "ext-bcmath": "*",
         "ext-json": "*",
+        "ext-filter": "*",
         "adw/js-context-bundle": "^0.4.4",
         "adw/seo-bundle": "^1.0",
         "adw/sonata-media-extra-bundle": "^1.0",

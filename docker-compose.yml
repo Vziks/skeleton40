@@ -44,6 +44,7 @@ services:
     command: --sql_mode=""
     volumes:
       - ./var/data/database:/var/lib/mysql:rw,delegated
+      - ./var/dump:/tmp/dump
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: skeleton4

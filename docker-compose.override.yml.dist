@@ -1,18 +1,18 @@
 version: '3.7'
 
 services:
-  rabbitmq:
-    image: rabbitmq:3.7-management
-    hostname: "app"
-    ports:
-      - "17672:15672"
-    volumes:
-      - .docker/rabbitmq/rabbitmq.config:/etc/rabbitmq/rabbitmq.config
-      - .docker/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
-      - ./var/data/rabbitmq:/var/lib/rabbitmq:rw,delegated
+#  rabbitmq:
+#    image: rabbitmq:3.7-management
+#    hostname: "app"
+#    ports:
+#      - "17672:15672"
+#    volumes:
+#      - .docker/rabbitmq/rabbitmq.config:/etc/rabbitmq/rabbitmq.config
+#      - .docker/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
+#      - ./var/data/rabbitmq:/var/lib/rabbitmq:rw,delegated
 
   app_cli:
-    command: "/bin/bash -c 'bin/setup-init.sh && while true; do sleep 30; done;'"
+    command: "/bin/bash -c 'while true; do sleep 30; done;'"
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:4.8
