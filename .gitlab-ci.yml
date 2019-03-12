@@ -60,7 +60,7 @@ validation_check:
 security_check:
   stage: validation
   image: kolyadin/php:72
-  allow_failure: false
+  allow_failure: true
   dependencies: []
   script:
     - composer install --profile --prefer-dist --no-interaction --no-scripts
