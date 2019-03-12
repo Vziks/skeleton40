@@ -13,6 +13,7 @@ help:
 	@echo "  app-stop                   Stop app"
 	@echo "  app-cache-clear            Clear app cache"
 	@echo "  app-validate               Validate application and security_check"
+	@echo "  phpunit-init               Prepare env for testing"
 	@echo "  phpunit-run                Start phpunit tests"
 	@echo "  database-migrate           Apply app migrations"
 	@echo "  database-diff              Show diff in migrations"
@@ -46,9 +47,13 @@ app-validate:
 		bin/console doctrine:schema:validate --skip-sync && \
 		vendor/bin/security-checker security:check"
 
+phpunit-init:
+	docker-compose up -d app_cli
+	docker-compose exec -T app_cli sh -c "bin/setup-test.sh"
+
 phpunit-run:
 	docker-compose up -d app_cli
-	docker-compose exec -T app_cli sh -c "bin/setup-test.sh && vendor/bin/simple-phpunit -c phpunit.xml"
+	docker-compose exec -T app_cli sh -c "vendor/bin/simple-phpunit -c phpunit.xml"
 
 database-migrate:
 	docker-compose up -d app_cli
