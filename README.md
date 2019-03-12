@@ -10,19 +10,19 @@ Skeleton4 - специальный собранный набор компоне�
 1. docker >= 18.06.0
 2. docker-compose >= 1.23.2
 
-Для нативного запуска приложения вам потребуется:
+Если запуск приложения через Docker невозможен и вы хотите работать нативно, вам потребуется:
 
 1. php      >= 7.1.3 (+iconv +imagick +bcmath +json +filter)
 2. composer >= 1.6.3
-3. mysql    >= 5.7
+3. mysql    >= 5.5
 
 ## Подготовка к установке и запуску приложения
 
 Скопируйте файл .env в .env.local (https://symfony.com/doc/current/configuration/dot-env-changes.html)
 
 Скопируйте файл docker-compose.override.yml.dist в docker-compose.override.yml
-Этот файл позволяет вам переопредлять стандартные настройки с учетом специфики вашей хост-системы.
-Читайте подробнее про [docker-compose.override.yml](https://docs.docker.com/compose/extends/)
+
+Этот файл позволяет вам переопредлять стандартные настройки с учетом специфики вашей хост-системы. Читайте подробнее про [docker-compose.override.yml](https://docs.docker.com/compose/extends/)
 
 **Если вы работаете на Linux**:
 
@@ -130,11 +130,7 @@ Deployment осуществляется на уровне протокола SSH
 #### Docker-way
 
 ```bash
-docker run -it --rm \
- -v $(pwd):/var/www:cached \
- -v ~/.ssh:/root/.ssh \
- kolyadin/ruby-rsync:alpine \
- sh -c 'cd /var/www && bundle install && bundle exec cap dev deploy'
+make deploy env=dev
 ```
 
 #### Native
@@ -153,9 +149,10 @@ bundle exec cap dev deploy
 
 ## Разработано с помощью
 
-* [Symfony 4.2](https://symfony.com/doc/current/index.html) - PHP Web Framework
+* [Symfony 4](https://symfony.com/doc/current/index.html) - PHP Web Framework
 * [Sonata Admin](https://sonata-project.org/bundles/admin/3-x/doc/index.html) - Admin generator
 * [Sonata Media](https://sonata-project.org/bundles/media/3-x/doc/index.html) - Media manager
+* [Capistrano](https://capistranorb.com/) - Deployment tool on Ruby
 
 ## Как вносить изменения в приложение
 
