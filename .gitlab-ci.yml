@@ -192,8 +192,6 @@ phpunit_73_80:
     - chmod 700 ~/.ssh
 # dependencies:
 #   - frontend_build
-  script:
-    - bundle install
   tags:
     - deploy
 
@@ -201,6 +199,7 @@ phpunit_73_80:
 #deploy_dev:
 #  <<: *deploy
 #  script:
+#    - bundle install
 #    - bundle exec cap dev deploy
 #  only:
 #    - dev
@@ -208,6 +207,7 @@ phpunit_73_80:
 #deploy_stag:
 #  <<: *deploy
 #  script:
+#    - bundle install
 #    - bundle exec cap stag deploy
 #  only:
 #    - stag
@@ -215,6 +215,7 @@ phpunit_73_80:
 #deploy_prod:
 #  <<: *deploy
 #  script:
+#    - bundle install
 #    - bundle exec cap prod deploy
 #  only:
 #    - master
