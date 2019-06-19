@@ -20,7 +20,7 @@ set :app_config_path, "config"
 set :linked_dirs, fetch(:linked_dirs, []).push('web/uploads', 'var/log')
 
 # Files that need to remain the same between deploys
-set :linked_files, fetch(:linked_files, []).push(.env.local')
+set :linked_files, fetch(:linked_files, []).push('.env.local')
 
 set :symfony_console_path, "bin/console"
 
