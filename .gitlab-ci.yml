@@ -181,7 +181,7 @@ phpunit_73_80:
 ##
 .deploy: &deploy
   stage: deploy
-  image: kolyadin/ruby-rsync:alpine
+  image: kolyadin/ruby-rsync
   cache: {}
   before_script:
     - rm -f /etc/localtime && ln -s /usr/share/zoneinfo/Europe/Moscow /etc/localtime
