@@ -4,7 +4,7 @@ if [[ ! -f phpunit.xml ]]; then
     cp phpunit.xml.dist phpunit.xml
 fi
 
-composer install --prefer-dist --no-interaction --optimize-autoloader --no-scripts
+composer install --prefer-dist --no-interaction --no-scripts
 
 php bin/console doctrine:database:create -e test --if-not-exists
 php bin/console doctrine:migrations:migrate -e test --no-interaction
