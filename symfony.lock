@@ -368,6 +368,9 @@
     "symfony/event-dispatcher": {
         "version": "v4.0.6"
     },
+    "symfony/event-dispatcher-contracts": {
+        "version": "v1.1.5"
+    },
     "symfony/expression-language": {
         "version": "v4.0.6"
     },
@@ -461,6 +464,9 @@
     "symfony/polyfill-php72": {
         "version": "v1.7.0"
     },
+    "symfony/polyfill-php73": {
+        "version": "v1.12.0"
+    },
     "symfony/process": {
         "version": "v4.0.6"
     },
@@ -532,6 +538,9 @@
             "version": "3.3",
             "ref": "6bcd6c570c017ea6ae5a7a6a027c929fd3542cd8"
         }
+    },
+    "symfony/translation-contracts": {
+        "version": "v1.1.5"
     },
     "symfony/twig-bridge": {
         "version": "v4.0.6"
