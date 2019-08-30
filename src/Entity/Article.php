@@ -6,42 +6,75 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Article.
+ * Project symfony-next.
  *
- * @author Anton Prokhorov
- *
- * @ORM\Entity()
+ * @author  Anton Prokhorov <vziks@live.ru>
+ * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
  */
 class Article
 {
     /**
-     * @var int
-     *
      * @ORM\Id()
+     * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=255)
      */
-    protected $title;
+    private $title;
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="text")
      */
-    protected $preview;
+    private $preview;
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="text")
      */
-    protected $content;
+    private $content;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getPreview(): ?string
+    {
+        return $this->preview;
+    }
+
+    public function setPreview(string $preview): self
+    {
+        $this->preview = $preview;
+
+        return $this;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(string $content): self
+    {
+        $this->content = $content;
+
+        return $this;
+    }
 
     public function __toString()
     {
@@ -51,73 +84,5 @@ class Article
         }
 
         return $toString;
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    /**
-     * @param string $content
-     *
-     * @return self
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * @param string $title
-     *
-     * @return Article
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPreview()
-    {
-        return $this->preview;
-    }
-
-    /**
-     * @param string $preview
-     *
-     * @return Article
-     */
-    public function setPreview($preview)
-    {
-        $this->preview = $preview;
-
-        return $this;
     }
 }

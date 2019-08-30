@@ -4,6 +4,11 @@ namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * Class DefaultControllerTest.
+ *
+ * @author  Anton Prokhorov <vziks@live.ru>
+ */
 class DefaultControllerTest extends WebTestCase
 {
     public function testIndex()
@@ -32,5 +37,4 @@ class DefaultControllerTest extends WebTestCase
 
         $this->assertTrue($client->getResponse()->isNotFound());
     }
-
 }

@@ -1,8 +1,19 @@
 <?php
 
-return PhpCsFixer\Config::create()
-    ->setRules([
-        '@Symfony' => true,
-        'array_syntax' => ['syntax' => 'short'],
-    ])
-;
+$finder = PhpCsFixer\Finder::create()
+->exclude(array('config', 'var/cache', 'web', 'src/Migrations'))
+->notPath('src/Kernel.php')
+->in(__DIR__);
+
+$rules = [
+    '@Symfony' => true,
+    'new_with_braces' => false,
+    'phpdoc_inline_tag' => false,
+    'cast_spaces' => ['space' => 'single'],
+    'concat_space' => ['spacing' => 'one'],
+    'array_syntax' => ['syntax' => 'short'],
+    'yoda_style' => true,
+    'phpdoc_no_empty_return' => false,
+];
+
+return PhpCsFixer\Config::create()->setRules($rules)->setFinder($finder);
