@@ -3,12 +3,13 @@
 namespace App\Tests\Admin;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
-use Symfony\Bundle\FrameworkBundle\Client;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use App\DataFixtures\ORM\LoadAdminDataFixture as FixtureAdmin;
 
 /**
  * Class AdminFunctionalTest.
- * Project symfony-next.
+ * Project skeleton4.
+ *
  * @author Anton Prokhorov
  */
 class AdminFunctionalTest extends WebTestCase
@@ -21,7 +22,7 @@ class AdminFunctionalTest extends WebTestCase
 
         if (false === static::$wasSetup) {
             $this->loadFixtures([
-                FixtureAdmin::class
+                FixtureAdmin::class,
             ]);
 
             static::$wasSetup = true;
@@ -29,13 +30,13 @@ class AdminFunctionalTest extends WebTestCase
     }
 
     /**
-     * @return Client
+     * @return KernelBrowser
      */
     public function testAdminLogin()
     {
-        $client = static::createClient();
+        $kernelBrowser = static::createClient();
 
-        $crawler = $client->request('GET', '/admin/login');
+        $crawler = $kernelBrowser->request('GET', '/admin/login');
 
         $form = $crawler->filter('button[type="submit"]')->form();
 
@@ -44,57 +45,59 @@ class AdminFunctionalTest extends WebTestCase
         $form['_username'] = $fakeAdmin->getUsername();
         $form['_password'] = $fakeAdmin->getPlainPassword();
 
-        $client->submit($form);
+        $kernelBrowser->submit($form);
 
-        $this->assertTrue($client->getResponse()->isRedirect());
-        $client->followRedirect();
+        $this->assertTrue($kernelBrowser->getResponse()->isRedirect());
+        $kernelBrowser->followRedirect();
 
-        $client->request('GET', '/admin/dashboard');
+        $kernelBrowser->request('GET', '/admin/dashboard');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $kernelBrowser->getResponse()->getStatusCode());
 
-        return $client;
+        return $kernelBrowser;
     }
 
     /**
      * @depends      testAdminLogin
      * @dataProvider menuItemsListProvider
-     * @param $link
-     * @param Client $client
+     *
+     * @param               $link
+     * @param KernelBrowser $kernelBrowser
      */
-    public function testMenuItemList($link, Client $client)
+    public function testMenuItemList($link, KernelBrowser $kernelBrowser)
     {
-        $client->request('GET', $link);
+        $kernelBrowser->request('GET', $link);
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $kernelBrowser->getResponse()->getStatusCode());
     }
 
     /**
      * @depends      testAdminLogin
      * @dataProvider menuItemsCreateProvider
+     *
      * @param $link
-     * @param Client $client
+     * @param KernelBrowser $kernelBrowser
      */
-    public function testMenuItemCreate($link, Client $client)
+    public function testMenuItemCreate($link, KernelBrowser $kernelBrowser)
     {
-        $client->request('GET', $link);
+        $kernelBrowser->request('GET', $link);
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $kernelBrowser->getResponse()->getStatusCode());
     }
 
     /**
      * @depends testAdminLogin
      *
-     * @param Client $client
+     * @param KernelBrowser $kernelBrowser
      */
-    public function testAdminLogout(Client $client)
+    public function testAdminLogout(KernelBrowser $kernelBrowser)
     {
-        $client->request('GET', '/admin/logout');
-        $this->assertTrue($client->getResponse()->isRedirect());
-        $client->followRedirect();
+        $kernelBrowser->request('GET', '/admin/logout');
+        $this->assertTrue($kernelBrowser->getResponse()->isRedirect());
+        $kernelBrowser->followRedirect();
 
-        $client->request('GET', '/admin/dashboard');
-        $this->assertTrue($client->getResponse()->isRedirect());
+        $kernelBrowser->request('GET', '/admin/dashboard');
+        $this->assertTrue($kernelBrowser->getResponse()->isRedirect());
     }
 
     /**
@@ -109,10 +112,9 @@ class AdminFunctionalTest extends WebTestCase
             ['/admin/sonata/media/gallery/create?context=default'],
             ['/admin/adw/seo/redirectrule/create'],
             ['/admin/adw/seo/rule/create'],
-            ['/robots/edit']
+            ['/robots/edit'],
         ];
     }
-
 
     /**
      * @return array

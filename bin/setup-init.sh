@@ -8,6 +8,10 @@ if [[ ! -f .env.local ]]; then
     cp .env .env.local
 fi
 
+if [[ ! -f .php_cs ]]; then
+    cp .php_cs.dist .php_cs
+fi
+
 composer install --prefer-dist -n -o
 
 php bin/console doctrine:database:create --if-not-exists
